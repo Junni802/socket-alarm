@@ -4,6 +4,10 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
+ext {
+    springCloudVersion = "2025.0.0"
+}
+
 group = 'covy'
 version = '0.0.1-SNAPSHOT'
 
@@ -22,8 +26,19 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.projectlombok:lombok'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'com.google.guava:guava:33.1.0-jre'
+    implementation 'com.example:chat-kafka-common:1.0.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+    }
 }
 
 tasks.named('test') {
